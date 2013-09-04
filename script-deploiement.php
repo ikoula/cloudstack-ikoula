@@ -45,7 +45,7 @@
 
                 /* Données utilisateur a passer au processus de déploiement de l'instance.
                 Ce paramètre nous sert à passer les paramètres Puppet au travers des userdata */
-                $vm01['conf']['userdata'] = '<USERDATA A UTILISER>;
+                $vm01['conf']['userdata'] = '<USERDATA A UTILISER>';
 
 
 /* ------------------------------ NE PLUS RIEN MODIFIER APRES CETTE LIGNE ----------------------------------- */
