@@ -1,0 +1,93 @@
+class apache::install {
+    case $::operatingsystem {
+        'CentOS': {
+            $apache_name = 'httpd'
+        }
+        'Fedora': {
+            $apache_name = 'httpd'
+        }
+        'OpenSuSE': {
+            $apache_name = 'apache2'
+        }
+
+        'Debian': {
+            $apache_name = 'apache2'
+        }
+        'Ubuntu': {
+            $apache_name = 'apache2'
+        }
+
+        default: {
+            $apache_name = 'apache2'
+        }
+    }
+
+    #Installation du paquet Apache selon le nom inhérent à la distribution :
+    package { "$apache_name":
+        ensure => present,
+        alias  => "apache",
+        }
+}
+
+class php::install {
+        case $::operatingsystem {
+        'CentOS': {
+            $php_name = 'php'
+        }
+        'Fedora': {
+            $php_name = 'php'
+        }
+        'OpenSuSE': {
+            $php_name = 'apache2-mod_php5'
+        }
+        'Debian': {
+            $php_name = 'libapache2-mod-php5'
+        }
+        'Ubuntu': {
+            $php_name = 'libapache2-mod-php5'
+        }
+        default: {
+            $php_name = 'libapache2-mod-php5'
+        }
+    }
+
+    # Installation du paquet module Php pour Apache :
+    package { "$php_name":
+        ensure => present,
+        require => Package ['apache']
+        }
+}
+
+class apache::service {
+         case $::operatingsystem {
+                'CentOS': {
+                $apache_service = 'httpd'
+                }
+                'Fedora': {
+                $apache_service = 'httpd'
+                }
+                'OpenSuSE': {
+                $apache_service = 'apache2'
+                }
+                'Debian': {
+                $apache_service = 'apache2'
+                }
+                'Ubuntu': {
+                $apache_service = 'apache2'
+                }
+                default: {
+                $apache_service  = 'apache2'
+                }
+        }
+        #On s'assure que le service Apache est en cours d'exécution et activé si l'installation de Apache s'est faites :
+        service { "$apache_service" :
+                        ensure     => running,
+                        enable     => true,
+                        require    => Class["apache::install"],
+        }
+}
+
+#On appelle toutes nos class précédentes via la class apache
+class apache {
+        include apache::install, apache::service, php::install
+}
