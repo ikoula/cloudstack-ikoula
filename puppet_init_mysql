@@ -1,0 +1,61 @@
+class mysql::install {
+    case $::operatingsystem {
+        'CentOS': {
+            $mysql_name = 'mysql-server'
+        }
+        'Fedora': {
+            $mysql_name = 'mysql-server'
+        }
+        'OpenSuSE': {
+            $mysql_name = 'mysql-community-server'
+        }
+
+        'Debian': {
+            $mysql_name = 'apache2'
+        }
+        'Ubuntu': {
+            $mysql_name = 'apache2'
+        }
+
+        default: {
+            $mysql_name = 'apache2'
+        }
+    }
+    # Installation du paquet MySQL selon son nom dans la distribution :
+    package { "$mysql_name":
+        ensure => present,
+        }
+}
+
+# Définition de l'état du service MySQL
+class mysql::service {
+         case $::operatingsystem {
+                'CentOS': {
+                $mysql_service = 'mysqld'
+                }
+                'Fedora': {
+                $mysql_service = 'mysqld'
+                }
+                'OpenSuSE': {
+                $mysql_service = 'mysql'
+                }
+                'Debian': {
+                $mysql_service = 'mysql'
+                }
+                'Ubuntu': {
+                $mysql_service = 'mysql'
+                }
+                default: {
+                $mysql_service  = 'mysql'
+                }
+        }
+        #On s'assure que le service mysql est en cours d'exécution et activé :
+        service { "$mysql_service" :
+                        ensure     => running,
+                        enable     => true,
+                        require    => Class["mysql::install"],
+        }
+}
+class mysql {
+        include mysql::install, mysql::service
+}
