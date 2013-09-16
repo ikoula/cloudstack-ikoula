@@ -36,7 +36,7 @@ $pubssh = trim(fgets(STDIN));
                 /* UUID(s) du réseau auquel sera connectée votre instance.
                 Utilisez la requête API 'listNetworks' ou l'interface pour lister les réseaux existants et déterminer le réseau voulu
                 */
-                $vm01['conf']['networkid'] = "<ID DE VOTRE RESEAU D'INVITE";
+                $vm01['conf']['networkid'] = "<ID DE VOTRE RESEAU D'INVITE>";
 
                 /* UUID de l'offre de service (configuration matérielle) voulue.
                 Utilisez la requête API 'listServiceOfferings' pour lister les offres existantes.
@@ -46,7 +46,7 @@ $pubssh = trim(fgets(STDIN));
                         - m1.large : d2b2e7b9-4ffa-419e-9ef1-6d413f08deab
                         - m1.extralarge : 1412009f-0e89-4cfc-a681-1cda0631094b
                 */
-                $vm01['conf']['serviceofferingid'] = "<UUID DE L'OFFRE DE SERVICE SOUHAITE>";
+                $vm01['conf']['serviceofferingid'] = "<UUID DE L'OFFRE DE SERVICE QUE VOUS SOUHAITEZ>";
 
                 /* UUID du modèle de systeme d'exploitation.
                 Vous pouvez aussi utiliser la requête API 'listTemplates' pour lister les modèles existants.
