@@ -46,7 +46,7 @@ $pubssh = trim(fgets(STDIN));
                         - m1.large : d2b2e7b9-4ffa-419e-9ef1-6d413f08deab
                         - m1.extralarge : 1412009f-0e89-4cfc-a681-1cda0631094b
                 */
-                $vm01['conf']['serviceofferingid'] = "<UUID DE L'OFFRE DE SERVICE QUE VOUS SOUHAITEZ>";
+                $vm01['conf']['serviceofferingid'] = "<UUID DE L'OFFRE DE SERVICE DE VOTRE CHOIX>";
 
                 /* UUID du modèle de systeme d'exploitation.
                 Vous pouvez aussi utiliser la requête API 'listTemplates' pour lister les modèles existants.
