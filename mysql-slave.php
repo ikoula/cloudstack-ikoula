@@ -1,13 +1,13 @@
 <?php
 /* Nom de votre choix pour l'instance (Nom de la machine et d'affichage dans l'interface)
 Caractères alphanumériques uniquement. Ce nom doit être unique au sein de votre réseau. */
-print "Nom à donner à votre instance (doit être unique au sein de votre réseau et comporter uniquement des caractères alphanumériques):";
+print "Nom a donner a votre instance :";
 $hostname = trim (fgets(STDIN));
 /* Mot de passe de votre choix pour le compte root de Mysql*/
 print "Mot de passe pour le compte root de MySQL :";
 $pwmysqlroot = trim(fgets(STDIN));
 /* Mot de passe de votre choix pour le compte de réplication replic_user de Mysql*/
-print "Mot de passe pour le compte de réplication replic_user : ";
+print "Mot de passe pour le compte de replication replic_user : ";
 $pwreplic = trim (fgets(STDIN));
 /* Adresse ip privée guest de l'instance MySQL Master*/
 print "Adresse ip guest (10.1.1.x) de votre serveur MySQL Maitre : ";
@@ -24,7 +24,7 @@ $pubssh = trim(fgets(STDIN));
         // Renseignez ici votre clef API ainsi que votre clef secrète
         // Nous conseillons de déporter cette information au sein d'un autre fichier PHP dont on restreindra l'accès
         define("APIKEY","<VOTRE CLEF D'API>");
-        define("SECRETKEY","<VOTRE CLEF SECRETE>");
+        define("SECRETKEY","<VOTRE CLEF PRIVEE>");
         //On définit l'URL d'appel de l'API (ou 'EndPoint')
         define("ENDPOINT","https://cloudstack.ikoula.com/client/api");
 
