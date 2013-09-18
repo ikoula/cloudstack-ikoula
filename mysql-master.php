@@ -61,7 +61,7 @@ $pubssh = trim(fgets(STDIN));
                 /* Données utilisateur a passer au processus de déploiement de l'instance.
                 Ce paramètre nous sert à passer les paramètres Puppet au travers des userdata */
 
-                $vm01['conf']['userdata'] = "echo $pwmysqlroot $pwreplic > /tmp/mysql && wget -O - http://puppetrepository.ikoula.com/mysql-master/install.sh | sh";
+                $vm01['conf']['userdata'] = "echo $pwmysqlroot $pwreplic > /tmp/mysql && puppet module install ikoula/mysqlmaster && puppet apply -e \"include mysqlmaster\"";
 
 /* ------------------------------ NE PLUS RIEN MODIFIER APRES CETTE LIGNE ----------------------------------- */
         $json_response = null;
