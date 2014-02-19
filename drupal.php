@@ -13,6 +13,14 @@ $pwmysqldrupal7 = trim (fgets(STDIN));
 /* Adresse ip privée guest de l'instance MySQL Master*/
 print "Port SSH publique pour cette instance :";
 $pubssh = trim(fgets(STDIN));
+/* UUID de l'offre de service (configuration matérielle) voulue
+Voir comment récupérer l’UUID d’une offre de calcul via l’API ici : https://support.ikoula.com/subindex-1-2-236.html*/
+print "UUID de l'offre de service (configuration matérielle) voulue (voir FAQ ttps://support.ikoula.com/subindex-1-2-236.html): ";
+$serviceofferinguuid = trim (fgets(STDIN));
+/* UUID du modèle de systeme d'exploitation voulu 
+Voir comment récupérer l’UUID d’un modèle via l’UI ou l'API ici : https://support.ikoula.com/subindex-1-2-236.html */
+print "UUID du modèle de systeme d'exploitation voulu (voir FAQ ttps://support.ikoula.com/subindex-1-2-236.html):";
+$templateuuid = trim(fgets(STDIN));
 
         // Liste complète des appels possibles : http://download.cloud.com/releases/3.0.6/api_3.0.6/TOC_User.html
 
@@ -40,20 +48,14 @@ $pubssh = trim(fgets(STDIN));
 
                 /* UUID de l'offre de service (configuration matérielle) voulue.
                 Utilisez la requête API 'listServiceOfferings' pour lister les offres existantes.
-                Actuellement :
-                        - m1.small : c6b89fea-1242-4f54-b15e-9d8ec8a0b7e8
-                        - m1.medium : 8dae8be9-5dae-4f81-89d1-b171f25ef3fd
-                        - m1.large : d2b2e7b9-4ffa-419e-9ef1-6d413f08deab
-                        - m1.extralarge : 1412009f-0e89-4cfc-a681-1cda0631094b
                 */
-                $vm01['conf']['serviceofferingid'] = "8dae8be9-5dae-4f81-89d1-b171f25ef3fd";
+                $vm01['conf']['serviceofferingid'] = "$serviceofferinguuid";
 
 
                 /* UUID du modèle de systeme d'exploitation.
                 Vous pouvez aussi utiliser la requête API 'listTemplates' pour lister les modèles existants.
-                Dans notre exemple nous allons nous baser sur le template 'Debian 7 - Minimal - 64bits'
                 */
-                $vm01['conf']['templateid'] = "06239517-eb64-441a-ae71-7a0c6d3a057a";
+                $vm01['conf']['templateid'] = "$templateuuid";
 
                 /* Nom de votre choix pour l'instance (Nom de la machine et d'affichage dans l'interface)
                 Caractères alphanumériques uniquement. Ce nom doit être unique au sein de votre réseau. */
