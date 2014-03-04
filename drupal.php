@@ -1,37 +1,49 @@
 <?php
 
-/* Nom de votre choix pour l'instance (Nom de la machine et d'affichage dans l'interface)
-                Caractères alphanumériques uniquement. Ce nom doit être unique au sein de votre réseau. */
+/* Clé API */
+print "Saisissez votre clé API :";
+$apikey = trim (fgets(STDIN));
+
+/* Clé privée */
+print "Saisissez votre clé privée :";
+$privatekey = trim (fgets(STDIN));
+
+/* ID du réseau */
+print "Saisissez l'ID de votre réseau :";
+$networkid = trim (fgets(STDIN));
+
+/* Nom d'instance */
 print "Nom à donner à votre instance :";
 $hostname = trim (fgets(STDIN));
+
 /* Mot de passe de votre choix pour le compte root de Mysql*/
 print "Mot de passe pour le compte MySQL root :";
 $pwmysqlroot = trim(fgets(STDIN));
+
 /* Mot de passe de votre choix pour le compte de réplication replic_user de Mysql*/
 print "Mot de passe pour le compte MySQL drupal7  : ";
 $pwmysqldrupal7 = trim (fgets(STDIN));
+
 /* Adresse ip privée guest de l'instance MySQL Master*/
 print "Port SSH publique pour cette instance :";
 $pubssh = trim(fgets(STDIN));
-/* UUID de l'offre de service (configuration matérielle) voulue
-Voir comment récupérer l’UUID d’une offre de calcul via l’API ici : https://support.ikoula.com/subindex-1-2-236.html*/
+
+/* UUID de l'offre de service (configuration matérielle) voulue */
 print "UUID de l'offre de service (configuration matérielle) voulue (voir FAQ ttps://support.ikoula.com/subindex-1-2-236.html): ";
 $serviceofferinguuid = trim (fgets(STDIN));
-/* UUID du modèle de systeme d'exploitation voulu 
-Voir comment récupérer l’UUID d’un modèle via l’UI ou l'API ici : https://support.ikoula.com/subindex-1-2-236.html */
+
+/* UUID du modèle de systeme d'exploitation voulu */ 
 print "UUID du modèle de systeme d'exploitation voulu (voir FAQ ttps://support.ikoula.com/subindex-1-2-236.html):";
 $templateuuid = trim(fgets(STDIN));
 
-        // Liste complète des appels possibles : http://download.cloud.com/releases/3.0.6/api_3.0.6/TOC_User.html
+        // Liste complète des appels possibles : https://cloudstack.apache.org/docs/api/apidocs-4.2/TOC_User.html 
 
         ################################
         # Paramètres généraux de l'API #
         ################################
 
-        // Renseignez ici votre clef API ainsi que votre clef secrète
-        // Nous conseillons de déporter cette information au sein d'un autre fichier PHP dont on restreindra l'accès
-        define("APIKEY","<Votre Clé API CloudStack by Ikoula>");
-        define("SECRETKEY","<Votre Clé privée CloudStack by Ikoula>");
+        define("APIKEY","$apikey");
+        define("SECRETKEY","$privatekey");
         //On définit l'URL d'appel de l'API (ou 'EndPoint')
         define("ENDPOINT","https://cloudstack.ikoula.com/client/api");
 
@@ -44,7 +56,7 @@ $templateuuid = trim(fgets(STDIN));
                 /* UUID(s) du réseau auquel sera connectée votre instance.
                 Utilisez la requête API 'listNetworks' ou l'interface pour lister les réseaux existants et déterminer le réseau voulu
                 */
-                $vm01['conf']['networkid'] = "<L'ID de votre réseau d'invité CloudStack by Ikoula>";
+                $vm01['conf']['networkid'] = "$networkid";
 
                 /* UUID de l'offre de service (configuration matérielle) voulue.
                 Utilisez la requête API 'listServiceOfferings' pour lister les offres existantes.

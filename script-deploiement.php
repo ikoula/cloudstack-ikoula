@@ -1,14 +1,41 @@
 <?php
-        // Liste complète des appels possibles : http://download.cloud.com/releases/3.0.6/api_3.0.6/TOC_User.html
+
+/* Clé API */
+print "Saisissez votre clé API :";
+$apikey = trim (fgets(STDIN));
+
+/* Clé privée */
+print "Saisissez votre clé privée :";
+$privatekey = trim (fgets(STDIN));
+
+/* ID du réseau */
+print "Saisissez l'ID de votre réseau :";
+$networkid = trim (fgets(STDIN));
+
+/* Nom d'instance */
+print "Nom à donner à votre instance :";
+$hostname = trim (fgets(STDIN));
+
+/* UUID de l'offre de service (configuration matérielle) voulue */
+print "UUID de l'offre de service (configuration matérielle) voulue (voir FAQ ttps://support.ikoula.com/subindex-1-2-236.html): ";
+$serviceofferinguuid = trim (fgets(STDIN));
+
+/* UUID du modèle de systeme d'exploitation voulu */
+print "UUID du modèle de systeme d'exploitation voulu (voir FAQ ttps://support.ikoula.com/subindex-1-2-236.html):";
+$templateuuid = trim(fgets(STDIN));
+
+/* Userdata */
+print "Saisissez votre commande userdata (facultatif, faites entrée pour valider)";
+$userdata = trim (fgets(STDIN));
+ 
+        // Liste complète des appels possibles : https://cloudstack.apache.org/docs/api/apidocs-4.2/TOC_User.html
 
         ################################
         # Paramètres généraux de l'API #
         ################################
 
-        // Renseignez ici votre clef API ainsi que votre clef secrète
-        // Nous conseillons de déporter cette information au sein d'un autre fichier PHP dont on restreindra l'accès
-        define("APIKEY","<VOTRE CLEF API>");
-        define("SECRETKEY","<VOTRE CLEF SECRETE>");
+        define("APIKEY","$apikey");
+        define("SECRETKEY","$privatekey");
         //On définit l'URL d'appel de l'API (ou 'EndPoint')
         define("ENDPOINT","https://cloudstack.ikoula.com/client/api");
 
@@ -21,31 +48,25 @@
                 /* UUID(s) du réseau auquel sera connectée votre instance.
                 Utilisez la requête API 'listNetworks' ou l'interface pour lister les réseaux existants et déterminer le réseau voulu
                 */
-                $vm01['conf']['networkid'] = "<ID DU RESEAU QUE VOUS SOUHAITEZ UTILISER>";
+                $vm01['conf']['networkid'] = "$networkid";
 
                 /* UUID de l'offre de service (configuration matérielle) voulue.
                 Utilisez la requête API 'listServiceOfferings' pour lister les offres existantes.
-                Actuellement :
-                        - m1.small : c6b89fea-1242-4f54-b15e-9d8ec8a0b7e8
-                        - m1.medium : 8dae8be9-5dae-4f81-89d1-b171f25ef3fd
-                        - m1.large : d2b2e7b9-4ffa-419e-9ef1-6d413f08deab
-                        - m1.extralarge : 1412009f-0e89-4cfc-a681-1cda0631094b
                 */
-                $vm01['conf']['serviceofferingid'] = "<ID DE L'OFFRE DE SERVICE QUE VOUS SOUHAITEZ UTILISER>";
-
+                $vm01['conf']['serviceofferingid'] = "$serviceofferinguuid";
 
                 /* UUID du modèle de systeme d'exploitation.
                 Vous pouvez aussi utiliser la requête API 'listTemplates' pour lister les modèles existants.
                 */
-                $vm01['conf']['templateid'] = "<ID DU TEMPLATE A UTILISER>";
+                $vm01['conf']['templateid'] = "$templateuuid";
 
                 /* Nom de votre choix pour l'instance (Nom de la machine et d'affichage dans l'interface)
                 Caractères alphanumériques uniquement. Ce nom doit être unique au sein de votre réseau. */
-                $vm01['conf']['hostname'] = "<NOM DE VOTRE INSTANCE>";
+                $vm01['conf']['hostname'] = "$hostname";
 
                 /* Données utilisateur a passer au processus de déploiement de l'instance.
                 Ce paramètre nous sert à passer les paramètres Puppet au travers des userdata */
-                $vm01['conf']['userdata'] = '<USERDATA A UTILISER>';
+                $vm01['conf']['userdata'] = '$userdata';
 
 
 /* ------------------------------ NE PLUS RIEN MODIFIER APRES CETTE LIGNE ----------------------------------- */
