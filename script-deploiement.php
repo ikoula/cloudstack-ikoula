@@ -17,11 +17,11 @@ print "Nom à donner à votre instance :";
 $hostname = trim (fgets(STDIN));
 
 /* UUID de l'offre de service (configuration matérielle) voulue */
-print "UUID de l'offre de service (configuration matérielle) voulue (voir FAQ ttps://support.ikoula.com/subindex-1-2-236.html): ";
+print "UUID de l'offre de service (configuration matérielle) voulue (voir FAQ https://support.ikoula.com/subindex-1-2-236.html): ";
 $serviceofferinguuid = trim (fgets(STDIN));
 
 /* UUID du modèle de systeme d'exploitation voulu */
-print "UUID du modèle de systeme d'exploitation voulu (voir FAQ ttps://support.ikoula.com/subindex-1-2-236.html):";
+print "UUID du modèle de systeme d'exploitation voulu (voir FAQ https://support.ikoula.com/subindex-1-2-236.html):";
 $templateuuid = trim(fgets(STDIN));
 
 /* Userdata */
